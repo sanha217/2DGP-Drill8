@@ -45,7 +45,7 @@ class AutoRun:
         if self.boy.x < 0 or self.boy.x > 800:
             self.boy.dir *= -1
             self.boy.face_dir *= -1
-        self.boy.x += self.boy.dir * 10
+        self.boy.x += self.boy.dir * 15
         if get_time() - self.boy.auto_run_start_time > 5.0:
             self.boy.state_machine.handle_state_event(('TIME_OUT', None))
 
@@ -160,7 +160,11 @@ class Boy:
                     left_up: self.IDLE
                 },
                 self.AUTO_RUN:{
-                    time_out: self.IDLE
+                    time_out: self.IDLE,
+                    right_down: self.RUN,
+                    left_down: self.RUN,
+                    right_up: self.RUN,
+                    left_up: self.RUN
                 }
             }
         )
