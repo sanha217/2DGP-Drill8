@@ -25,6 +25,23 @@ def time_out(e):
 
 #---------------------------------------------------------------
 
+class AutoRun:
+
+    def __init__(self, boy):
+        pass
+
+    def enter(self, e):
+        pass
+
+    def exit(self, e):
+        pass
+
+    def do(self):
+        pass
+
+    def draw(self):
+        pass
+
 class Run:
 
     def __init__(self, boy):
