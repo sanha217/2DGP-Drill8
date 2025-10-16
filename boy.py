@@ -28,7 +28,7 @@ def time_out(e):
 class AutoRun:
 
     def __init__(self, boy):
-        pass
+        self.boy = boy
 
     def enter(self, e):
         pass
@@ -40,7 +40,10 @@ class AutoRun:
         pass
 
     def draw(self):
-        pass
+        if self.boy.face_dir == 1:  # right
+            self.boy.image.clip_draw(self.boy.frame * 100, 100, 100, 100, self.boy.x, self.boy.y + 30, 200, 200)
+        else:  # face_dir == -1: # left
+            self.boy.image.clip_draw(self.boy.frame * 100, 0, 100, 100, self.boy.x, self.boy.y + 30, 200, 200)
 
 class Run:
 
@@ -61,9 +64,9 @@ class Run:
         self.boy.x += self.boy.dir * 5
 
     def draw(self):
-        if self.boy.face_dir == 1: # right
+        if self.boy.face_dir == 1:  # right
             self.boy.image.clip_draw(self.boy.frame * 100, 100, 100, 100, self.boy.x, self.boy.y)
-        else: # face_dir == -1: # left
+        else:  # face_dir == -1: # left
             self.boy.image.clip_draw(self.boy.frame * 100, 0, 100, 100, self.boy.x, self.boy.y)
 
 class Sleep:
