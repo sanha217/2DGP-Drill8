@@ -1,3 +1,5 @@
+# 2024184023 이산하
+
 from pico2d import *
 from boy import Boy
 from grass import Grass
