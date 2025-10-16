@@ -34,6 +34,7 @@ class AutoRun:
         self.boy = boy
 
     def enter(self, e):
+        self.boy.dir = self.boy.face_dir
         self.boy.auto_run_start_time = get_time()
 
     def exit(self, e):
@@ -41,10 +42,10 @@ class AutoRun:
 
     def do(self):
         self.boy.frame = (self.boy.frame + 1) % 8
-        self.boy.x += self.boy.dir * 10
         if self.boy.x < 0 or self.boy.x > 800:
             self.boy.dir *= -1
             self.boy.face_dir *= -1
+        self.boy.x += self.boy.dir * 10
         if get_time() - self.boy.auto_run_start_time > 5.0:
             self.boy.state_machine.handle_state_event(('TIME_OUT', None))
 
@@ -133,6 +134,7 @@ class Boy:
         self.IDLE = Idle(self)
         self.SLEEP = Sleep(self)
         self.RUN = Run(self)
+        self.AUTO_RUN = AutoRun(self)
         self.state_machine = StateMachine(
             self.IDLE,
             {
@@ -148,13 +150,17 @@ class Boy:
                     right_down: self.RUN,
                     left_down: self.RUN,
                     right_up: self.RUN,
-                    left_up: self.RUN
+                    left_up: self.RUN,
+                    a_key_down: self.AUTO_RUN
                 },
                 self.RUN: {
                     right_down: self.IDLE,
                     left_down: self.IDLE,
                     right_up: self.IDLE,
                     left_up: self.IDLE
+                },
+                self.AUTO_RUN:{
+                    time_out: self.IDLE
                 }
             }
         )
